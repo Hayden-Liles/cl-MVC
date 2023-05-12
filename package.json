@@ -1,0 +1,24 @@
+{
+  "name": "my-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "bcw-serve",
+    "sass": "sass --watch assets/scss/main.scss:assets/style/main.css"
+  },
+  "author": "Hayden Liles",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "sass": "^1.62.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.0-alpha3"
+  }
+}
