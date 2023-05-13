@@ -1,13 +1,13 @@
 {
-  "name": "my-starter",
+  "name": "cl-mvc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "bcw-serve",
+    "serve": "cl-serve",
     "sass": "sass --watch assets/scss/main.scss:assets/style/main.css"
   },
-  "author": "Hayden Liles",
+  "author": "Hayden Liles | CodeLabrynth",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.40.0",
