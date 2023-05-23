@@ -1,7 +1,8 @@
-import { TestController } from './Controllers/TestController.js'
+import { ExampleController } from './Controllers/ExampleController.js'
+
 
 class App {
-  testController = new TestController();
+  exampleController = new ExampleController();
 }
 
 window["app"] = new App();
