@@ -1,7 +1,13 @@
 import { logger } from "../Utils/Logger.js";
+import { calculatorServices } from '../Services/CalculatorServices.js'
 
-export class ExampleController {
+function _drawCalculator(){
+  document.getElementById('mainContainer').innerHTML = calculatorServices.getCalculator()
+}
+
+export class CalculatorController {
   constructor() {
+    _drawCalculator()
     this.elements = {
       currentNumber: document.querySelector("#currentNumber"),
       previousNumber: document.querySelector("#previousNumber"),
@@ -13,6 +19,7 @@ export class ExampleController {
     this.previousNumber = "";
     this.currentNumber = "";
     this.operation = null;
+    this.history = calculatorServices.getHistory()
   }
 
   InputCall(input) {
@@ -62,23 +69,27 @@ export class ExampleController {
     
     symbols[operation].classList.remove('text-outline');
 
-    if(this.currentNumber !== '' && this.previousNumber !== '' && this.operation) {
+    if(this.currentNumber != '' && this.previousNumber != '' && this.operation) {
       switch(this.operation){
         case '+':
+          calculatorServices.addHistory({equation:`${this.previousNumber} + ${this.currentNumber}`, total:`${(Number(this.previousNumber) + Number(this.currentNumber))}` })
           this.previousNumber = (Number(this.previousNumber) + Number(this.currentNumber));
           break;
         case '-':
+          calculatorServices.addHistory({equation:`${this.previousNumber} - ${this.currentNumber}`, total:`${(Number(this.previousNumber) - Number(this.currentNumber))}` })
           this.previousNumber = (Number(this.previousNumber) - Number(this.currentNumber));
           break;
         case '÷':
+          calculatorServices.addHistory({equation:`${this.previousNumber} / ${this.currentNumber}`, total:`${(Number(this.previousNumber) / Number(this.currentNumber))}` })
           this.previousNumber = (Number(this.previousNumber) / Number(this.currentNumber));
           break;
         case 'x':
+          calculatorServices.addHistory({equation:`${this.previousNumber} * ${this.currentNumber}`, total:`${(Number(this.previousNumber) * Number(this.currentNumber))}` })
           this.previousNumber = (Number(this.previousNumber) * Number(this.currentNumber));
           break;
       }
       this.currentNumber = '';
-    } else if(this.previousNumber === '') {
+    } else if(this.previousNumber == '') {
       this.previousNumber = this.currentNumber;
       this.currentNumber = '';
     }
@@ -126,10 +137,10 @@ export class ExampleController {
 
   plusMinus() {
     const check = this.currentNumber.charAt(0);
-    if (check === "") {
+    if (check == "") {
       this.elements.currentNumber.innerText = "-0";
       this.currentNumber += "-";
-    } else if (check === "-") {
+    } else if (check == "-") {
       this.currentNumber = this.currentNumber.slice(1);
       this.drawCurNumber();
     } else {

@@ -1,8 +1,8 @@
-import { ExampleController } from './Controllers/ExampleController.js'
+import { CalculatorController } from './Controllers/CalculatorController.js'
 
 
 class App {
-  exampleController = new ExampleController();
+  calculatorController = new CalculatorController();
 }
 
 window["app"] = new App();
