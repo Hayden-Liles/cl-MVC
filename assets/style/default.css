@@ -8,7 +8,7 @@
 }
 
 .square{
-  height: 100px;
+  height: 70px;
 }
 
 .equalsqr{
@@ -16,4 +16,18 @@
 }
 .cfont{
   font-size: 40px;
+}
+
+.clineHeight{
+  line-height: 1;
+}
+
+#historyContainer{
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.hisText{
+  overflow-x:hidden;
 }

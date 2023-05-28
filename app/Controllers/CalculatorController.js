@@ -2,7 +2,10 @@ import { logger } from "../Utils/Logger.js";
 import { calculatorServices } from '../Services/CalculatorServices.js'
 
 function _drawCalculator(){
-  document.getElementById('mainContainer').innerHTML = calculatorServices.getCalculator()
+  document.getElementById('calculatorContainer').innerHTML = calculatorServices.getCalculator()
+}
+function _drawHistoryContainer(){
+  document.getElementById('calculatorContainer').innerHTML += calculatorServices.getHistoryContainer()
 }
 
 export class CalculatorController {
@@ -19,7 +22,7 @@ export class CalculatorController {
     this.previousNumber = "";
     this.currentNumber = "";
     this.operation = null;
-    this.history = calculatorServices.getHistory()
+    this.historyToggle = false
   }
 
   InputCall(input) {
@@ -33,6 +36,7 @@ export class CalculatorController {
       'backspace': () => this.backspace(),
       'plusMinus': () => this.plusMinus(),
       '.': () => this.addDecimal(),
+      'history': () => this.drawHistory(),
     };
 
     if (operations[input]) {
@@ -42,6 +46,49 @@ export class CalculatorController {
       this.drawCurNumber();
     }
   }
+
+  drawHistory(){
+    if(this.historyToggle){
+      _drawCalculator()
+      this.historyToggle = false
+      this.elements = {
+        currentNumber: document.querySelector("#currentNumber"),
+        previousNumber: document.querySelector("#previousNumber"),
+        plusSymbol: document.querySelector("#plusSymbol"),
+        minusSymbol: document.querySelector("#minusSymbol"),
+        divideSymbol: document.querySelector("#divideSymbol"),
+        multiplySymbol: document.querySelector("#multiplySymbol"),
+      };
+    }else{
+      _drawHistoryContainer()
+      document.querySelector('#mainCalculatorContainer').classList.remove('m-auto')
+      document.querySelector('#calculatorContainer').classList.add('justify-content-around')
+      document.querySelector('#historyContainer').innerHTML = calculatorServices.getHistoryTemplate()
+      this.historyToggle = true
+      this.elements = {
+        currentNumber: document.querySelector("#currentNumber"),
+        previousNumber: document.querySelector("#previousNumber"),
+        plusSymbol: document.querySelector("#plusSymbol"),
+        minusSymbol: document.querySelector("#minusSymbol"),
+        divideSymbol: document.querySelector("#divideSymbol"),
+        multiplySymbol: document.querySelector("#multiplySymbol"),
+      };
+    }
+  }
+
+  redrawHistory(){
+      document.querySelector('#historyContainer').innerHTML = calculatorServices.getHistoryTemplate()
+      this.elements = {
+        currentNumber: document.querySelector("#currentNumber"),
+        previousNumber: document.querySelector("#previousNumber"),
+        plusSymbol: document.querySelector("#plusSymbol"),
+        minusSymbol: document.querySelector("#minusSymbol"),
+        divideSymbol: document.querySelector("#divideSymbol"),
+        multiplySymbol: document.querySelector("#multiplySymbol"),
+      };
+  }
+
+  
 
   drawCurNumber() {
     this.elements.currentNumber.innerText = this.currentNumber || "0";
@@ -73,18 +120,30 @@ export class CalculatorController {
       switch(this.operation){
         case '+':
           calculatorServices.addHistory({equation:`${this.previousNumber} + ${this.currentNumber}`, total:`${(Number(this.previousNumber) + Number(this.currentNumber))}` })
+          if(this.historyToggle){
+            this.redrawHistory()
+          }
           this.previousNumber = (Number(this.previousNumber) + Number(this.currentNumber));
           break;
         case '-':
           calculatorServices.addHistory({equation:`${this.previousNumber} - ${this.currentNumber}`, total:`${(Number(this.previousNumber) - Number(this.currentNumber))}` })
+          if(this.historyToggle){
+            this.redrawHistory()
+          }
           this.previousNumber = (Number(this.previousNumber) - Number(this.currentNumber));
           break;
         case '÷':
           calculatorServices.addHistory({equation:`${this.previousNumber} / ${this.currentNumber}`, total:`${(Number(this.previousNumber) / Number(this.currentNumber))}` })
+          if(this.historyToggle){
+            this.redrawHistory()
+          }
           this.previousNumber = (Number(this.previousNumber) / Number(this.currentNumber));
           break;
         case 'x':
           calculatorServices.addHistory({equation:`${this.previousNumber} * ${this.currentNumber}`, total:`${(Number(this.previousNumber) * Number(this.currentNumber))}` })
+          if(this.historyToggle){
+            this.redrawHistory()
+          }
           this.previousNumber = (Number(this.previousNumber) * Number(this.currentNumber));
           break;
       }
@@ -154,5 +213,13 @@ export class CalculatorController {
       this.currentNumber += '.';
       this.drawCurNumber();
     }
+  }
+
+  selectHistory(total){
+    this.previousNumber = `${total}`
+    logger.log(this.previousNumber)
+    this.currentNumber = ''
+    this.drawCurNumber()
+    this.drawPrevNumber()
   }
 }

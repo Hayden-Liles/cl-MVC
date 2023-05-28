@@ -22,25 +22,34 @@
 
   <body>
     <header>
-      <div class="container">
-        <div class="p-3 pb-2 border-bottom border-secondary border-2 d-flex">
-          <!-- NOTE LOGO -->
-          <img src="./assets/img/logo.png" alt="" class="nav-logo" />
-          <div class="d-flex justify-content-between flex-grow-1">
-            <div class="d-flex align-items-end fs-4 fw-bold">
-              <div class="ms-5">
-                <p class="px-2">Home</p>
-              </div>
-              <div>
-                <p class="px-2">About</p>
-              </div>
-            </div>
+      <div class="container px-0 px-md-3">
+        <nav class="navbar navbar-expand-lg border-bottom border-secondary border-2 px-3 px-md-0 pb-0">
+          <a class="navbar-brand ms-md-2" href="#">
+            <img src="./assets/img/logo.png" alt="" class="nav-logo" />
+          </a>
+          <button  class="navbar-toggler pb-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="mdi mdi-menu text-tertiary fs-1" id="navButton"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto fs-4 fw-bold d-flex align-items-end ms-3">
+              <li class="nav-item ms-3 me-2">
+                <a class="nav-link pb-0">Home</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link pb-0">About</a>
+              </li>
+            </ul>
           </div>
-        </div>
+        </nav>
       </div>
     </header>
 
-    <main id="mainContainer"></main>
+    <main id="mainContainer">
+      <div class="container mt-3">
+        <div class="row" id="calculatorContainer">
+        </div>
+      </div>
+    </main>
 
     <footer></footer>
 

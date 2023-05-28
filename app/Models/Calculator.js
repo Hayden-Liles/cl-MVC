@@ -1,10 +1,8 @@
 export class Calculator {
-  static CalculatorTemplate = 
+  static CalculatorBodyTemplate = 
     `
-    <div class="container mt-3">
-        <div class="row d-flex">
           <!-- NOTE CONTAINER FOR CALCULATOR -->
-          <div class="col-4 m-auto">
+          <div class="col-10 col-md-4 m-auto" id='mainCalculatorContainer'>
             <!-- AREA 1 -->
             <div class="row border border-secondary border-2" id="cArea1">
               <div class="col-7 ps-3 py-3 pe-0">
@@ -56,10 +54,16 @@ export class Calculator {
               <div onclick="app.calculatorController.InputCall('plusMinus')" class="col-3 selectable border-start border-end border-bottom border-secondary border-2 square d-flex align-items-center justify-content-center"><i class='mdi mdi-plus-minus-variant cfont text-center'></i></div>
               <div onclick="app.calculatorController.InputCall('0')" class="col-3 selectable border-end border-bottom border-secondary border-2 square d-flex align-items-center justify-content-center"><p class='cfont text-center'>0</p></div>
               <div onclick="app.calculatorController.InputCall('.')" class="col-3 selectable border-end border-bottom border-secondary border-2 square d-flex align-items-center justify-content-center"><p class='cfont text-center'>.</p></div>
-              <div onclick="app.calculatorController.InputCall('=')" class="col-3 selectable border-end border-bottom border-secondary border-2 square d-flex align-items-center justify-content-center"><p class='cfont text-center'>=</p></div>
+              <div onclick="app.calculatorController.InputCall('=')" class="col-3 bg-tertiary selectable border-end border-bottom border-secondary border-2 square d-flex align-items-center justify-content-center"><p class='cfont text-center fw-bold'>=</p></div>
             </div>
           </div>
-        </div>
-      </div>
     `;
+
+  static CalculatorHistoryContainer =
+  `
+  <div class="col-4">
+    <div class="row" id="historyContainer">
+    </div>
+  </div>
+  `
 }
