@@ -61,7 +61,7 @@ export class Calculator {
 
   static CalculatorHistoryContainer =
   `
-  <div class="col-4">
+  <div class="col-12 col-md-4 mt-3 mb-5">
     <div class="row" id="historyContainer">
     </div>
   </div>

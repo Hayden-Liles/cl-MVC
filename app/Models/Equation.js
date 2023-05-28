@@ -6,7 +6,7 @@ export class Equation {
 
   get equationTemplate(){
     return /*html*/`
-    <div class="col-12 text-end">
+    <div class="col-12 text-end my-1">
     <div onclick="app.calculatorController.selectHistory('${this.total}')" class="border border-outline border-2 rounded-3 px-3 py-1 selectable">
       <p class="fs-5 hisText">${this.equation} =</p>
       <p class="fs-3 text-tertiary hisText">${this.total}</p>
